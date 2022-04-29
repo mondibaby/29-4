@@ -1,0 +1,178 @@
+<!-- <form #baby="ngForm" (ngSubmit)="onSubmit(baby)">
+<label for="name">Name</label>
+<input type="text" [(ngModel)]="m.name" name="name" #name="ngModel"><br><br>
+<label for="firstname">Firstname</label>
+<input type="text" [(ngModel)]="m.firstname" name="firstname"  #firstname="ngModel"><br><br>
+<label for="lastname">Lastname</label>
+<input type="text" [(ngModel)]="m.lastname" name="lastname" #lastname="ngModel" ><br><br>
+<button type="submit">submit</button>
+
+</form> -->
+
+<!--
+    {{var_low | uppercase}}<br>
+    {{var_cur | currency:"INR"}}<br>
+    {{var_cur | currency:"USD"}}<br>
+    {{var_per | percent}}<br>
+    {{var_des | number:"1.0-1"}}<br>
+    {{datestring | date:"y/M/d"}}<br>
+    {{var_sli | slice:3:5}} -->
+
+
+<!--
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <h1 class="page-title">User Registration</h1>
+          <form #registerForm="ngForm">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="formData.name"
+                     name="username"
+                     #username="ngModel"
+                     required />
+            </div>
+            <div *ngIf="username.invalid && (username.dirty || username.touched)"
+              class="alert alert-danger">
+              <div *ngIf="username.errors">
+                Username is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email"
+                     class="form-control"
+                     [(ngModel)]="formData.email"
+                      name="email"
+                      #email="ngModel"
+                     required />
+            </div>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="alert alert-danger">
+              <div *ngIf="email.errors">
+                Email is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password"
+                     class="form-control"
+                      [(ngModel)]="formData.password"
+                      name="password"
+                      #password="ngModel"
+                     required />
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+              class="alert alert-danger">
+              <div *ngIf="password.errors">
+                Password is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="passwordConfirmation">Confirm Password</label>
+              <input type="password"
+                     class="form-control"
+                     [(ngModel)]="formData.passwordConfirmation"
+                     name="passwordConfirmation"
+                     #passwordConfirmation="ngModel"
+                     required />
+            </div>
+            <div *ngIf="passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched)"
+              class="alert alert-danger">
+              <div *ngIf="passwordConfirmation.errors">
+                Confirm Password is required
+              </div>
+            </div>
+            <button
+            type="submit"
+            class="btn btn-warning"
+            [disabled] = "!registerForm.form.valid"
+            (click)="register()">
+                      Register
+        </button>
+          </form>
+        </div>
+      </div>
+  </div> -->
+
+  <!-- ------------------------------------------------------------------ -->
+  <h1 style="text-align: center;">Angular 13 Reactive Forms Validation</h1>
+<div class="body">
+<form [formGroup]="babyform" (ngSubmit)="submit()">
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input
+            formControlName="name"
+            id="name"
+            type="text"
+            class="form-control">
+        <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+            <div *ngIf="f['name'].errors && f['name'].errors['required']">Name is required.</div>
+            <div *ngIf="f['name'].errors && f['name'].errors['minlength']">Name should be 3 character.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input
+            formControlName="email"
+            id="email"
+            type="text"
+            class="form-control">
+        <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+            <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
+            <div *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid email address.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="body">Description</label>
+        <textarea
+            formControlName="body"
+            id="body"
+            type="text"
+            class="form-control">
+        </textarea>
+        <div *ngIf="f['body'].touched && f['body'].invalid" class="alert alert-danger">
+            <div *ngIf="f['body'].errors && f['body'].errors['required']">Body is required.</div>
+        </div>
+    </div><br>
+    <button class="btn btn-primary" [disabled]="babyform.invalid" type="submit">Submit</button>
+</form>
+</div>
+ <table>
+  <thead>
+    <tr>
+      <th>s.no</th>
+      <th>name</th>
+      <th>email</th>
+      <th>body</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let x  of getarray; let i=index;">
+      <td>
+        {{i+1}}
+      </td>
+      <td>
+        {{x.name}}
+      </td>
+      <td>
+        {{x.email}}
+      </td>
+      <td>
+        {{x.body}}
+      </td>
+      <td>
+       <button (click)=" (x.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
